@@ -28,6 +28,7 @@
         <h4>Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}  </h4>
         <strong> {{ leaderboard.total }}</strong>
         <div class="voffset5"></div>
+        {% assign position = 1 %}
         {% for entry in leaderboard.entries %}
           {% if  entry.signup.custom_values_for_display['company'] %}
             <div class="people-list {% cycle 'odd', 'even' %}">
@@ -36,7 +37,7 @@
               {% else %}
                 <div class="people-list-pic"> <img src="{{ entry.signup.profile_image_url | replace: '//d3n8a8pro7vhmx.cloudfront.net/assets/icons/buddy.png','//d3n8a8pro7vhmx.cloudfront.net/themes/54879050ebad643af7000001/attachments/original/1422564770/supporter-badge.png?1422564770' }}">
               {% endif %}
-              <span class="leaderboard-rank">{{ entry.position }}</span></div>
+                <span class="leaderboard-rank">{{ position }}</span></div>
               {% if entry.signup.has_password? %}
                 <div class="people-name">{{ entry.signup.published_name_linked }}  <em>{{entry.signup.custom_values_for_display['company']}}</em></div>
               {% else %}
@@ -44,6 +45,7 @@
               {% endif %}
               {{ entry.total }} {{ leaderboard.goal_name }}
             </div>
+            {% assign position = position | plus: 1  %}
           {% endif %}
         {% endfor %}
       {% endif %}
