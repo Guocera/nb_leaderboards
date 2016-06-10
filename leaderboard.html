@@ -30,7 +30,7 @@
         <div class="voffset5"></div>
         {% assign position = 1 %}
         {% for entry in leaderboard.entries %}
-          {% if  entry.signup.custom_values_for_display['company'] %}
+          {% if  entry.signup.custom_values_for_display['branchy_program'] and entry.signup.custom_values_for_display['company'] %}
             <div class="people-list {% cycle 'odd', 'even' %}">
               {% if entry.signup.has_password? %}
                 <div class="people-list-pic">{{ entry.signup.bigger_profile_image | replace: '//d3n8a8pro7vhmx.cloudfront.net/assets/icons/buddy.png','//d3n8a8pro7vhmx.cloudfront.net/themes/54879050ebad643af7000001/attachments/original/1422564770/supporter-badge.png?1422564770'}}
