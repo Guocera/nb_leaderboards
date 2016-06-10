@@ -25,8 +25,7 @@
       {% endif %}
   
       {% if leaderboard.display_number_results > 0 %}
-        <h4>Top {{ leaderboard.display_number_results }} {{ leaderboard.display_name }}  </h4>
-        <strong> {{ leaderboard.total }}</strong>
+        <h2 class="headline">Top Branchy</h2>
         <div class="voffset5"></div>
         {% assign position = 1 %}
         {% for entry in leaderboard.entries %}
