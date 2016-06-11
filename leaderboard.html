@@ -10,6 +10,11 @@
   {% endif %}
 
   {% for leaderboard in page.page_leaderboards %}
+    {% assign companies = 0 %}
+    {% for entry in leaderboard.entries %}
+      {{ entry.total | remove_first: "+" }}
+      {% assign companies[entry.company] = companies[entry.company] | plus: entry.total  %}
+    {% endfor %}
     <div class="leaderboard{% if forloop.last %} last{% endif %}">
       {% if leaderboard.has_goal? %}
         {% assign thermo_width = 50 %}
