@@ -12,7 +12,7 @@
   {% for leaderboard in page.page_leaderboards %}
     {% assign companies = 0 %}
     {% for entry in leaderboard.entries %}
-      {{ entry.total | remove_first: "+" }}
+      {{ entry.total | remove_first: "+" | remove_first: "np" }}
       {% assign companies[entry.company] = companies[entry.company] | plus: entry.total  %}
     {% endfor %}
     <div class="leaderboard{% if forloop.last %} last{% endif %}">
