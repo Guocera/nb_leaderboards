@@ -8,12 +8,21 @@
       {{ page.leaderboard.content }}
     </div>
   {% endif %}
-
+  {% assign vege[3] = 100 %}
+  {{ vege[3] }} hi
+  
   {% for leaderboard in page.page_leaderboards %}
-    {% assign companies = 0 %}
     {% for entry in leaderboard.entries %}
+      {% if companies[entry.company] %}
+        hi {{ entry.company }}
+        {% assign companies[entry.company] = 0 %}
+      {% endif %}
       {% assign np = entry.total | remove_first: "+" | remove_first: "np" | plus: 0 %}
       {% assign companies[entry.company] = companies[entry.company] | plus: np  %}
+      {{ companies[entry.company] }}
+    {% endfor %}
+    {% for company in companies %}
+      {{ company[0] }}: {{ company[1] }} np
     {% endfor %}
     <div class="leaderboard{% if forloop.last %} last{% endif %}">
       {% if leaderboard.has_goal? %}
