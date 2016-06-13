@@ -11,21 +11,11 @@
   
   {% for leaderboard in page.page_leaderboards %}
 
-    {% for entry in leaderboard.entries %}
-      {% if companies contains entry.company %}
-
-        {% assign companies = companies | join: "|" %}
-        {% assign companies = companies | append: "|" | append: entry.company | split: "|" %}
-      {% endif %}
-    {% endfor %}
-
-
     {% assign companies = "" | split: "|" %}    
     {% for entry in leaderboard.entries %}
       {% unless companies contains entry.signup.custom_values_for_display['company'] %}
         {% assign companies = companies | join: "|" %}
         {% assign companies = companies | append: "|" | append: entry.signup.custom_values_for_display['company'] | split: "|" %}
-  {{ companies | append: "" }}
       {% endunless %}
 
   
