@@ -8,15 +8,25 @@
       {{ page.leaderboard.content }}
     </div>
   {% endif %}
-  {% assign vege[3] = 100 %}
-  {{ vege[3] }} hi
   
   {% for leaderboard in page.page_leaderboards %}
+
     {% for entry in leaderboard.entries %}
-      {% if companies[entry.company] %}
-        hi {{ entry.company }}
-        {% assign companies[entry.company] = 0 %}
+      {% if companies contains entry.company %}
+
+        {% assign companies = companies | join: "|" %}
+        {% assign companies = companies | append: "|" | append: entry.company | split: "|" %}
       {% endif %}
+    {% endfor %}
+
+
+    {% assign companies = "" | split: "|" %}    
+    {% for entry in leaderboard.entries %}
+      {% assign companies = companies | join: "|" %}
+      {% assign companies = companies | append: "|" | append: entry.signup.custom_values_for_display['company'] | split: "|" %}
+  {{ companies }}
+  
+  
       {% assign np = entry.total | remove_first: "+" | remove_first: "np" | plus: 0 %}
       {% assign companies[entry.company] = companies[entry.company] | plus: np  %}
       {{ companies[entry.company] }}
@@ -52,9 +62,9 @@
               {% endif %}
                 <span class="leaderboard-rank">{{ position }}</span></div>
               {% if entry.signup.has_password? %}
-                <div class="people-name">{{ entry.signup.published_name_linked }}  <em>{{entry.signup.custom_values_for_display['company']}}</em></div>
+                <div class="people-name">{{ entry.signup.published_name_linked }}  <em>{{ entry.signup.custom_values_for_display['company'] }}</em></div>
               {% else %}
-                <div class="people-name">{{ entry.signup.published_name }}  <em>{{entry.signup.custom_values_for_display['company']}}</em></div>
+                <div class="people-name">{{ entry.signup.published_name }}  <em>{{ entry.signup.custom_values_for_display['company'] }}</em></div>
               {% endif %}
               {{ entry.total }} {{ leaderboard.goal_name }}
             </div>
