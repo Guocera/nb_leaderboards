@@ -11,8 +11,11 @@
   
   {% for leaderboard in page.page_leaderboards %}
 
+    {% comment %}Creates array{% endcomment %}
     {% assign companies = "" | split: "|" %}    
+     
     {% for entry in leaderboard.entries %}
+      {% comment %}Adds new company name to companies var{% endcomment %}
       {% unless companies contains entry.signup.custom_values_for_display['company'] %}
         {% assign companies = companies | join: "|" %}
         {% assign companies = companies | append: "|" | append: entry.signup.custom_values_for_display['company'] | split: "|" %}
