@@ -17,14 +17,12 @@
      
     {% for entry in leaderboard.entries %}
       {% comment %}Adds new company name to companies var{% endcomment %}
-      {% if entry.signup.custom_values_for_display['company'] %}
-      {% unless companies contains entry.signup.custom_values_for_display['company'] %}
-  {{ entry.signup.custom_values_for_display['company'] }}
-<p>  Company name: {{ entry.signup.custom_values_for_display['company'] }}</p>
-  <p>  Person name: {{ entry.signup.published_name  }}</p>
-        {% assign companies = companies | join: "|" %}
-        {% assign companies = companies | append: "|" | append: entry.signup.custom_values_for_display['company'] | append: "|" | append: "0" | split: "|" %}
-      {% endunless %}
+      {% assign company_name = entry.signup.custom_values_for_display['company'] %}
+      {% if company_name %}
+        {% unless companies contains company_name %}
+          {% assign companies = companies | join: "|" %}
+          {% assign companies = companies | append: "|" | append: company_name | append: "|" | append: "0" | split: "|" %}
+        {% endunless %}
       {% endif %}
 
       {% comment %}Adds capital to companies total{% endcomment %}
