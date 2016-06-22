@@ -12,7 +12,8 @@
   {% for leaderboard in page.page_leaderboards %}
 
     {% comment %}Creates array{% endcomment %}
-    {% assign companies = "" | split: "|" %}    
+    {% assign companies = "" | split: "|" %}
+    {% assign companies_total_capital = "" | split: "|" %}
      
     {% for entry in leaderboard.entries %}
       {% comment %}Adds new company name to companies var{% endcomment %}
@@ -21,7 +22,9 @@
         {% assign companies = companies | append: "|" | append: entry.signup.custom_values_for_display['company'] | split: "|" %}
       {% endunless %}
 
-  
+      {% comment %}Adds capital to companies total{% endcomment %}
+      {% for company in companies %}
+      {% endfor %}
   
       {% assign np = entry.total | remove_first: "+" | remove_first: "np" | plus: 0 %}
       {% assign companies[entry.company] = companies[entry.company] | plus: np  %}
