@@ -18,10 +18,11 @@
     {% for entry in leaderboard.entries %}
       {% comment %}Adds new company name to companies var{% endcomment %}
       {% assign company_name = entry.signup.custom_values_for_display['company'] %}
+      {% assign company_name_with_ini_capital = company_name | append: ",0" %}
       {% if company_name %}
-        {% unless companies contains company_name %}
+        {% unless companies contains company_name_with_ini_capital %}
           {% assign companies = companies | join: "|" %}
-          {% assign companies = companies | append: "|" | append: company_name | append: "|" | append: "0" | split: "|" %}
+          {% assign companies = companies | append: "|" | append: company_name | append: "," | append: "0" | split: "|" %}
         {% endunless %}
       {% endif %}
 
